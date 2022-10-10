@@ -14,9 +14,7 @@ import seedu.address.model.person.UniqueEntryList;
  */
 public class AddressBook implements ReadOnlyPennyWise {
 
-    private final UniqueEntryList expenditure;
-
-    private final UniqueEntryList income;
+    private final UniqueEntryList entries;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,8 +24,7 @@ public class AddressBook implements ReadOnlyPennyWise {
      *   among constructors.
      */
     {
-        expenditure = new UniqueEntryList();
-        income = new UniqueEntryList();
+        entries = new UniqueEntryList();
     }
 
     public AddressBook() {}
@@ -46,16 +43,8 @@ public class AddressBook implements ReadOnlyPennyWise {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setExpenditure(List<Entry> entries) {
-        this.expenditure.setEntries(entries);
-    }
-
-    /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setIncome(List<Entry> entries) {
-        this.income.setEntries(entries);
+    public void setEntries(List<Entry> entries) {
+        this.entries.setEntries(entries);
     }
 
     /**
@@ -64,26 +53,25 @@ public class AddressBook implements ReadOnlyPennyWise {
     public void resetData(ReadOnlyPennyWise newData) {
         requireNonNull(newData);
 
-        setExpenditure(newData.getExpenditureList());
-        setIncome(newData.getIncomeList());
+        setEntries(newData.getEntryList());
     }
 
-    //// entry-level operations
+    //// person-level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    public boolean hasExpenditure(Entry entry) {
+    public boolean hasEntry(Entry entry) {
         requireNonNull(entry);
-        return expenditure.contains(entry);
+        return entries.contains(entry);
     }
 
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
-    public void addExpenditure(Entry e) {
-        expenditure.add(e);
+    public void addEntry(Entry e) {
+        entries.add(e);
     }
 
     /**
@@ -91,83 +79,42 @@ public class AddressBook implements ReadOnlyPennyWise {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setExpenditure(Entry target, Entry editedEntry) {
+    public void setEntries(Entry target, Entry editedEntry) {
         requireNonNull(editedEntry);
 
-        expenditure.setEntries(target, editedEntry);
+        entries.setEntries(target, editedEntry);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeExpenditure(Entry key) {
-        expenditure.remove(key);
-    }
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    public boolean hasIncome(Entry entry) {
-        requireNonNull(entry);
-        return income.contains(entry);
-    }
-
-    /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
-     */
-    public void addIncome(Entry e) {
-        income.add(e);
-    }
-
-    /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    public void setIncome(Entry target, Entry editedEntry) {
-        requireNonNull(editedEntry);
-
-        income.setEntries(target, editedEntry);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeIncome(Entry key) {
-        income.remove(key);
+    public void removeEntry(Entry key) {
+        entries.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return expenditure.asUnmodifiableObservableList().size() + " entries";
+        return entries.asUnmodifiableObservableList().size() + " entries";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Entry> getExpenditureList() {
-        return expenditure.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Entry> getIncomeList() {
-        return income.asUnmodifiableObservableList();
+    public ObservableList<Entry> getEntryList() {
+        return entries.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && expenditure.equals(((AddressBook) other).expenditure)
-                && income.equals(((AddressBook) other).income));
+                && entries.equals(((AddressBook) other).entries));
     }
 
     @Override
     public int hashCode() {
-        return expenditure.hashCode();
+        return entries.hashCode();
     }
 }

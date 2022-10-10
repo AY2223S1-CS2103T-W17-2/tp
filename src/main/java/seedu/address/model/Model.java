@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Person;
 import seedu.address.model.entry.Entry;
 
 /**
@@ -55,50 +56,26 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasExpenditure(Entry entry);
+    boolean hasEntry(Entry entry);
 
     /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
-    void deleteExpenditure(Entry target);
+    void deleteEntry(Entry target);
 
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
-    void addExpenditure(Entry entry);
+    void addEntry(Entry entry);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setExpenditure(Entry target, Entry editedEntry);
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    boolean hasIncome(Entry entry);
-
-    /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deleteIncome(Entry target);
-
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-     */
-    void addIncome(Entry entry);
-
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setIncome(Entry target, Entry editedEntry);
+    void setEntry(Entry target, Entry editedEntry);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Entry> getFilteredEntryList();
