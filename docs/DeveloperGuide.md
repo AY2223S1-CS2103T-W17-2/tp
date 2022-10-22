@@ -270,6 +270,39 @@ Step 10. The `AddCommand` then creates a `CommandResult` instance and returns it
   * Pros: Users can be more flexible in grouping their spending/incomes.
   * Cons: Possible dilution of categories, which would make the PieChart diagram not as useful.
 
+### View Feature
+
+The `view` command is implemented by the `ViewCommandParser` and `ViewCommand` classes.
+
+`ViewCommandParser` class is responsible for parsing the parameter received from the user.
+
+`ViewCommand` class is responsible for generating the summary statistic for incomes or expenditures.
+
+Below is a sequence diagram and explanation of how the `ViewCommand` is executed.
+
+Step 1.The user enters `view t/e` command in the main window.
+
+Step 2. The command is handled by `LogicManager#execute` method,
+which then calls the `PennyWiseParser#parseCommand` method
+
+Step 3. The `PennyWiseParser` matches the word summary in the string and extracts the argument string `t/e`.
+
+Step 4. The `PennyWiseParser` then calls `ViewCommandParser#parse` method and the argument string is converted to an `EntryType`.
+
+Step 5. The `ViewCommandParser` creates a new `EntryType` instance to handle the entry type.
+
+Step 6. The `ViewCommandParser` creates a new `ViewCommand` instance with the `EntryType` instance and
+returns it to `PennyWiseParser`, which in turn returns to `LogicManger`.
+
+Step 7. The `LogicManager` calls the `ViewCommand#execute` method.
+
+Step 8. The `ViewCommand` calls the `Model#updateFilteredEntry` method and
+filters the income and expenditure entries by the month
+
+Step 9. The application calculates the summary statistics for the filtered income and expenditure entries.
+
+Step 10. The `ViewCommand` then creates a CommandResult and returns it to `LogicManager`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
