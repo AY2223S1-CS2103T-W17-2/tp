@@ -22,10 +22,15 @@ public class AmountTest {
 
     @Test
     public void add_validAmounts_success() {
-        Amount amount1 = new seedu.address.model.entry.Amount("1.00");
-        Amount amount2 = new seedu.address.model.entry.Amount("2.00");
+        Amount amount1a = new seedu.address.model.entry.Amount("1.00");
+        Amount amount2a = new seedu.address.model.entry.Amount("2.00");
 
-        assertEquals(new seedu.address.model.entry.Amount("3.00"), Amount.add(amount1, amount2));
+        assertEquals(new seedu.address.model.entry.Amount("3.00"), Amount.add(amount1a, amount2a));
+
+        Amount amount1b = new seedu.address.model.entry.Amount("1.29");
+        Amount amount2b = new seedu.address.model.entry.Amount("2.33");
+
+        assertEquals(new seedu.address.model.entry.Amount("3.62"), Amount.add(amount1b, amount2b));
     }
 
     @Test
