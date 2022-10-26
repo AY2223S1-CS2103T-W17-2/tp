@@ -15,13 +15,6 @@ import seedu.address.testutil.ExpenditureBuilder;
 
 
 public class ExpenditureTest {
-
-    // @Test
-    // public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-    //     Entry expenditure = new ExpenditureBuilder().build();
-    //     assertThrows(UnsupportedOperationException.class, () -> expenditure.getTag());
-    // }
-
     @Test
     public void isSameExpenditure() {
         // same object -> returns True
@@ -33,7 +26,6 @@ public class ExpenditureTest {
 
     @Test
     public void equals() {
-
         //same values -> returns true
         Entry lunchCopy = new ExpenditureBuilder(LUNCH).build();
         assertTrue(LUNCH.equals(lunchCopy));
@@ -65,7 +57,5 @@ public class ExpenditureTest {
         // different tags -> return false
         editedEntry = new ExpenditureBuilder(LUNCH).withTag(VALID_TAG_MOVIE).build();
         assertFalse(LUNCH.equals(editedEntry));
-
-
     }
 }

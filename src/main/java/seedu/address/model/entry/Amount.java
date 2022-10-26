@@ -5,6 +5,8 @@ import static java.lang.Double.parseDouble;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DecimalFormat;
+
 /**
  * Represents an Entry's amount in the penny wise application.
  * Guarantees: immutable; is valid as declared in {@link #isValidAmount(String)}
@@ -13,7 +15,9 @@ public class Amount {
 
     public static final String MESSAGE_CONSTRAINTS = "Expense amount should only contain positive numbers, "
                     + "and it should be formatted to accept 2 decimal places";
-    public static final String VALIDATION_REGEX = "^\\s*(?=.*[1-9])\\d*(?:\\.\\d{1,2})?\\s*$";
+    public static final String VALIDATION_REGEX = "^\\s*(?=.*[1-9])\\d*\\.\\d{2}\\s*$";
+    private static final DecimalFormat AMOUNT_FORMAT = new DecimalFormat("0.00");
+
     private final double amount;
     private final String amountString;
 
@@ -41,7 +45,8 @@ public class Amount {
     }
 
     public static Amount add(Amount amount1, Amount amount2) {
-        return new Amount(String.valueOf(amount1.getValue() + amount2.getValue()));
+        double amount = amount1.getValue() + amount2.getValue();
+        return new Amount(AMOUNT_FORMAT.format(amount));
     }
 
     @Override

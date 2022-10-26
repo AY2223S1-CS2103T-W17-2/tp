@@ -30,16 +30,34 @@ public class AmountTest {
 
     @Test
     public void isValidAmount() {
-        // null amount
+        // EP: null
         assertThrows(NullPointerException.class, () -> Amount.isValidAmount(null));
 
-        // invalid amount
-        assertFalse(Amount.isValidAmount(""));
+        // EP: empty string
+        assertFalse(Amount.isValidAmount("")); // Boundary value
         assertFalse(Amount.isValidAmount("  "));
 
-        // valid amount
-        String validAmount = "3.22";
-        assertTrue(Amount.isValidAmount(validAmount));
+        // EP: not a number
+        assertFalse(Amount.isValidAmount("abc"));
+        assertFalse(Amount.isValidAmount("aaa"));
 
+        // EP: negative numbers
+        assertFalse(Amount.isValidAmount("-1"));
+        assertFalse(Amount.isValidAmount("-1.11"));
+
+        // EP: numbers with white space
+        assertFalse(Amount.isValidAmount("3. 22"));
+
+        // EP: positive numbers
+        assertTrue(Amount.isValidAmount("3.22"));
+        assertTrue(Amount.isValidAmount("30.22"));
+        assertTrue(Amount.isValidAmount("30000.22"));
+        assertTrue(Amount.isValidAmount(" 3.22")); // leading white space
+        assertTrue(Amount.isValidAmount("3.22 ")); // trailing white space
+        assertTrue(Amount.isValidAmount(" 3.22 "));
+
+        assertFalse(Amount.isValidAmount("3")); // Zero decimal place
+        assertFalse(Amount.isValidAmount("3.1")); // One decimal place
+        assertFalse(Amount.isValidAmount("3.333")); // Three decimal place
     }
 }
