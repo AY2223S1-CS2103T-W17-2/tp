@@ -44,6 +44,16 @@ public class Amount {
         return amount;
     }
 
+    /**
+     * Adds the value in the two specified {@code Amount} and returns a new {@code Amount}
+     * that contains a value equivalent to the sum. The addition respects the standard
+     * addition operator and its properties, such as commutativity, associativity, identity
+     * and distributivity.
+     *
+     * @param amount1 An {@code Amount} containing the value to be added
+     * @param amount2 An {@code Amount} containing the value to be added
+     * @return An {@code Amount} containing the value of the sum of the two specified {@Amount}.
+     */
     public static Amount add(Amount amount1, Amount amount2) {
         double amount = amount1.getValue() + amount2.getValue();
         return new Amount(AMOUNT_FORMAT.format(amount));
